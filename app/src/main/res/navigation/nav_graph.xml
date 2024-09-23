@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/continentsFragment">
+
+    <fragment
+        android:id="@+id/continentsFragment"
+        android:name="com.example.cards.ContinentsFragment"
+        tools:layout="@layout/fragment_continents">
+        <action
+            android:id="@+id/actionContinentsFragmentToCountriesFragment"
+            app:destination="@id/countriesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/countriesFragment"
+        android:name="com.example.cards.CountriesFragment"
+        tools:layout="@layout/fragment_countries">
+        <argument
+            android:name="continentName"
+            app:argType="string" />
+    </fragment>
+
+
+</navigation>
