@@ -11,25 +11,26 @@ import com.example.cards.databinding.ItemCountryBinding
 class CountriesAdapter(
     private val countries: List<Country>,
     private val onClick: (Country) -> Unit
-) : RecyclerView.Adapter<CountriesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
 
-    inner class ViewHolder(private val binding: ItemCountryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(country: Country) {
-            binding.textViewCountryName.text = country.name
-            binding.textViewCountryDescription.text = country.description
-            Glide.with(binding.root.context).load(country.imageUrl).into(binding.imageViewCountry)
-            binding.root.setOnClickListener { onClick(country) }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val binding = ItemCountryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return CountryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(countries[position])
+    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
+        val country = countries[position]
+        holder.bind(country)
+        holder.itemView.setOnClickListener { onClick(country) }
     }
 
     override fun getItemCount() = countries.size
+
+    inner class CountryViewHolder(private val binding: ItemCountryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(country: Country) {
+            binding.textViewCountryName.text = country.name
+        }
+    }
 }

@@ -8,20 +8,40 @@
     <fragment
         android:id="@+id/continentsFragment"
         android:name="com.example.cards.ContinentsFragment"
+        android:label="ContinentsFragment"
         tools:layout="@layout/fragment_continents">
+
         <action
-            android:id="@+id/actionContinentsFragmentToCountriesFragment"
+            android:id="@+id/action_continentsFragment_to_countriesFragment"
+            app:destination="@id/countriesFragment" />
+        <action
+            android:id="@+id/action_continentsFragment_to_countriesFragment2"
             app:destination="@id/countriesFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/countriesFragment"
         android:name="com.example.cards.CountriesFragment"
+        android:label="CountriesFragment"
         tools:layout="@layout/fragment_countries">
         <argument
-            android:name="continentName"
-            app:argType="string" />
+            android:name="continent"
+            app:argType="com.example.cards.Continent" />
+        <action
+            android:id="@+id/action_countriesFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_countriesFragment_to_detailFragment2"
+            app:destination="@id/detailFragment" />
     </fragment>
 
-
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.cards.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="country"
+            app:argType="com.example.cards.Country" />
+    </fragment>
 </navigation>

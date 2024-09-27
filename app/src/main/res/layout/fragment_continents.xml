@@ -19,12 +19,14 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textStyle="bold"
-
         android:layout_marginTop="16dp"/>
+
+
     <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/carouselRecyclerview"/>
+
     <TextView
         android:id="@+id/textViewCountryDescription"
         android:layout_width="wrap_content"

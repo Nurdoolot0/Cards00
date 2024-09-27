@@ -2,16 +2,15 @@ package com.example.cards
 
 import ContinentsAdapter
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cards.databinding.FragmentContinentsBinding
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
-
 class ContinentsFragment : Fragment() {
 
     private var _binding: FragmentContinentsBinding? = null
@@ -224,16 +223,12 @@ class ContinentsFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.carouselRecyclerview.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        val adapter = ContinentsAdapter(continents) { continent ->
-            val bundle = Bundle().apply {
-                putSerializable("continent_key", continent)
-            }
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CountriesFragment::class.java, bundle)
-                .addToBackStack(null)
-                .commit()
+
+        val adapter = ContinentsAdapter(continents) { selectedContinent ->
+            val action = ContinentsFragmentDirections.actionContinentsFragmentToCountriesFragment(selectedContinent)
+            findNavController().navigate(action)
         }
-        binding.carouselRecyclerview.adapter = adapter
+
         binding.carouselRecyclerview.adapter = adapter
         binding.carouselRecyclerview.apply {
             set3DItem(true)
